@@ -1,0 +1,382 @@
+/**
+ * ═══════════════════════════════════════════════════════════════════════════
+ * MASONRY GALLERY - PREMIUM STYLING
+ * Modern portfolio gallery with seamless layout
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+
+/* ═════════════════════════════════════════════════════════════════════════ */
+/* MASONRY CONTAINER & LAYOUT */
+/* ═════════════════════════════════════════════════════════════════════════ */
+
+.masonry-gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 0;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    position: relative;
+}
+
+.masonry-sizer {
+    grid-column: 5;
+    width: 30%;
+    /* 5 columns by default */
+}
+
+/* Full-width sizer for different breakpoints */
+.masonry-gallery--2col .masonry-sizer {
+    width: 50%;
+}
+
+.masonry-gallery--3col .masonry-sizer {
+    width: 33.333%;
+}
+
+.masonry-gallery--4col .masonry-sizer {
+    width: 25%;
+}
+
+.masonry-gallery--5col .masonry-sizer {
+    width: 20%;
+}
+
+.masonry-gallery--6col .masonry-sizer {
+    width: 16.666%;
+}
+
+/* ═════════════════════════════════════════════════════════════════════════ */
+/* MASONRY ITEMS */
+/* ═════════════════════════════════════════════════════════════════════════ */
+
+.masonry-item {
+    position: relative;
+    overflow: hidden;
+    background: #100028;
+    display: block;
+    grid-column: span 1;
+    padding: 0;
+    aspect-ratio: 1;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.masonry-item.visible {
+    opacity: 1;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Different item sizes */
+.masonry-item--w2 {
+    grid-column: span 2;
+    aspect-ratio: 2;
+}
+
+.masonry-item--h2 {
+    grid-row: span 2;
+    aspect-ratio: 0.5;
+}
+
+.masonry-item--w2h2 {
+    grid-column: span 2;
+    grid-row: span 2;
+    aspect-ratio: 1;
+}
+
+/* ═════════════════════════════════════════════════════════════════════════ */
+/* MASONRY ITEM IMAGE */
+/* ═════════════════════════════════════════════════════════════════════════ */
+
+.masonry-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 1;
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.masonry-item img.loaded {
+    opacity: 1;
+}
+
+.masonry-item:hover img {
+    transform: scale(1.08);
+    filter: brightness(0.7) saturate(1.2);
+}
+
+/* ═════════════════════════════════════════════════════════════════════════ */
+/* MASONRY ITEM OVERLAY */
+/* ═════════════════════════════════════════════════════════════════════════ */
+
+.masonry-item__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(14, 3, 33, 0.172);
+    backdrop-filter: blur(0.2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+}
+
+.masonry-item:hover .masonry-item__overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ═════════════════════════════════════════════════════════════════════════ */
+/* MASONRY ITEM ACTION BUTTONS */
+/* ═════════════════════════════════════════════════════════════════════════ */
+
+.masonry-item__actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInScale 0.3s ease-out;
+}
+
+.masonry-item:hover .masonry-item__actions {
+    transform: translateY(0);
+}
+
+.masonry-item__btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, hsl(0, 0%, 30%),hsl(0, 0%, 30%));
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.masonry-item__btn:hover {
+    transform: scale(1.15);
+    background: linear-gradient(135deg, #a70000,#a70000 100%);
+    color: hsl(0, 0%, 30%);
+}
+
+.masonry-item__btn:active {
+    transform: scale(0.95);
+}
+
+/* ═════════════════════════════════════════════════════════════════════════ */
+/* MASONRY ITEM META INFORMATION */
+/* ═════════════════════════════════════════════════════════════════════════ */
+
+.masonry-item__meta {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 30px 20px 20px;
+    transform: translateY(10px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+.masonry-item:hover .masonry-item__meta {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.masonry-item__meta__title {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    word-break: break-word;
+}
+
+.masonry-item__meta__category {
+    color: hwb(0 49% 10%);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 5px 0 0 0;
+}
+
+/* ═════════════════════════════════════════════════════════════════════════ */
+/* FILTER BUTTONS */
+/* ═════════════════════════════════════════════════════════════════════════ */
+
+/* ═════════════════════════════════════════════════════════════════════════ */
+/* ANIMATIONS */
+/* ═════════════════════════════════════════════════════════════════════════ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ═════════════════════════════════════════════════════════════════════════ */
+/* RESPONSIVE DESIGN */
+/* ═════════════════════════════════════════════════════════════════════════ */
+
+/* Ultrawide (1440px+) - 6 columns */
+@media (min-width: 1440px) {
+    .masonry-sizer {
+        width: 16.666%;
+    }
+
+    .masonry-item--w2 {
+        grid-column: span 2;
+    }
+
+    .masonry-item__meta__title {
+        font-size: 16px;
+    }
+}
+
+/* Widescreen (1200px - 1439px) - 5 columns */
+@media (max-width: 1439px) {
+    .masonry-gallery {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* Desktop (1024px - 1199px) - 4 columns */
+@media (max-width: 1199px) {
+    .masonry-gallery {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Tablet (768px - 1023px) - 3 columns */
+@media (max-width: 1023px) {
+    .masonry-gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .masonry-item--w2 {
+        grid-column: span 1;
+        aspect-ratio: 1;
+    }
+
+    .masonry-item--h2 {
+        grid-row: span 1;
+        aspect-ratio: 1;
+    }
+
+    .masonry-item--w2h2 {
+        grid-column: span 1;
+        grid-row: span 1;
+        aspect-ratio: 1;
+    }
+}
+
+/* Mobile (480px - 767px) - 2 columns */
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    height: 100%;
+}
+
+@media (max-width: 767px) {
+    .masonry-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .masonry-item {
+        aspect-ratio: 1;
+    }
+}
+
+/* Mobile Small (<480px) - 2 columns, compact */
+@media (max-width: 479px) {
+    .masonry-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ═════════════════════════════════════════════════════════════════════════ */
+/* ACCESSIBILITY */
+/* ═════════════════════════════════════════════════════════════════════════ */
+
+.masonry-item__btn:focus {
+    outline: 2px solid hwb(0 49% 10%);
+    outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .masonry-item,
+    .masonry-item img,
+    .masonry-item__overlay,
+    .masonry-item__meta,
+    .masonry-item__actions,
+    .masonry-filter-btn {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ═════════════════════════════════════════════════════════════════════════ */
+/* DARK MODE SUPPORT */
+/* ═════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+    .masonry-filter-btn {
+        background: #2a2a2a;
+        color: #e0e0e0;
+    }
+
+    .masonry-filter-btn:hover {
+        color: hwb(0 49% 10%);
+    }
+
+    .masonry-item__meta__title {
+        color: #ffffff;
+    }
+}
